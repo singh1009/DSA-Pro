@@ -1,0 +1,82 @@
+
+############# Circular Queue ##########
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class CircularQue{
+  
+  public:
+    int front, rear, size;
+    int *Q;
+    
+    CircularQue(int size)
+    {
+        this->size =size;
+        front =rear = 0;
+    }
+    
+    void Cenqueue(int x)
+    {
+        if((rear+1)%size == front)
+            cout<<"Queue is Full";
+            
+        rear = (rear+1)%size;
+        Q[rear] =x;
+    }
+    
+    int Cdequeue()
+    {
+        int x =-1;
+        if(front == rear)
+            cout<<"Queue Empty";
+        else
+        {
+            front =(front+1)%size;
+            x =Q[front];
+        }
+        return x;
+    }
+    
+    void CDisplay()
+    {
+        int i = (front+1);
+        while(i!=(rear+1)%size)
+        {
+            cout<<Q[i]<<" ";
+            i =(i+1)%size;
+        }
+        cout<<"\n";
+    }
+    
+};
+
+int main()
+{
+    cout<<"Bismillahirrahmanirrahim"<<"\n";
+    CircularQue q(6);
+    
+    q.Cenqueue(10);
+    q.Cenqueue(20);
+    q.Cenqueue(30);
+    q.Cenqueue(40);
+    q.Cenqueue(50);
+    
+    // q.Cenqueue(60);
+    cout<<"Original Queue"<<"\n";
+    q.CDisplay();
+    
+    q.Cdequeue();
+    q.Cdequeue();
+    
+    cout<<"Queue After dequeue two elements"<<"\n";
+    q.CDisplay();
+    
+    q.Cenqueue(1);
+    q.Cenqueue(2);
+    
+    cout<<"Queue again After enqueue two elements"<<"\n";
+    q.CDisplay();
+    
+    return 0;
+}
